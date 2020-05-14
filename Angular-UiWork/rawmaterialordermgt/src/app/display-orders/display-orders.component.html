@@ -1,0 +1,16 @@
+<h1>Display all Orders</h1>
+<table border="1">
+    <tr>
+      <th> Order Id </th>
+      <th> Name </th>
+      <th> Total Price </th> 
+    </tr>
+
+      <tr *ngFor= "let order of orders">
+        <td>{{order.orderId}}</td>
+        <td>{{order.name}}</td>
+        <td>{{order.totalPrice}}</td>
+      </tr>
+ </table>
+
+ 

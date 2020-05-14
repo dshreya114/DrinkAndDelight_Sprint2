@@ -1,0 +1,16 @@
+<form #data="ngForm" (ngSubmit)= "updateOrder(data)">
+    <div>
+        <label>Enter Order Id :</label>
+        <input type = "text" name ="orderId">
+    </div>
+
+    <div>
+        <label>Enter Delivery Status :</label>
+        <input type = "text" name = "supplierId">
+    </div>
+
+    <input type = "submit" value = "Update Order">
+</form>
+
+<div *ngIf="rawMaterialOrder !=null">
+<h3>Deliverey Status updated Successfully</h3>  

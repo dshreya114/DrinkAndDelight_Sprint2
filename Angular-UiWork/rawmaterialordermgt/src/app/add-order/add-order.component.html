@@ -1,43 +1,63 @@
-<form #data="ngForm" (ngSubmit)="data.valid && addOrder(data)">
-    <div>   
+<div class="container" style="margin-top: 70px; margin-left: 200px;">
+    <h3>Place Order :</h3>
+<form #orderForm="ngForm" (ngSubmit)="orderForm.valid && addOrder(orderForm)">
+   
+    <div class="form-group">   
     <label>Raw Material Name</label>
-     <input type="text" ngModel name="name">
+     <input type="text" class="form-control" name="name" ngModel #nameCtrl=ngModel required  >
+     <div *ngIf="nameCtrl.errors!=null && nameCtrl.errors.required">
+        Name is required.
     </div>
-
-    <div>
+    </div>
+<br>
+    <div class="form-group">
     <label>Supplier Id</label>
-    <input type="text" ngModel name="supplierId">
-    </div>    
-    
-    <div>
-        <label>Warehouse Id</label>
-        <input type = "text" ngModel name ="warehouseId">
+    <input type="text" class="form-control"  name="supplierId" ngModel #supplierIdCtrl = ngModel required minlength="5">
+    <div *ngIf="supplierIdCtrl.errors!=null && supplierIdCtrl.errors.required">
+        Supplier Id is required.
+        </div>
+    <div *ngIf ="supplierIdCtrl.errors!=null && supplierIdCtrl.errors.minlength">
+        Minimun length should be 5.
     </div>
-
-    <div>
+   </div>    
+ <br>   
+    <div class="form-group">
+        <label>Warehouse Id</label>
+        <input type = "text" class="form-control" name ="warehouseId" ngModel #warehouseIdCtrl= ngModel required minlength="5">
+        <div *ngIf="warehouseIdCtrl.errors!=null && warehouseIdCtrl.errors.required">
+            Warehouse Id is required.
+            </div>
+        <div *ngIf ="warehouseIdCtrl.errors!=null && warehouseIdCtrl.errors.minlength">
+            Minimum length should be 5.
+        </div>
+    </div>
+<br>
+    <div class="form-group">
         <label>Quantity Value</label>
-        <input type = "number"  name = "quantityValue" ngModel #quantityValueCtrl= "ngModel" required>
+        <input type = "number" class="form-control" name = "quantityValue" ngModel #quantityValueCtrl= "ngModel" required>
         <div *ngIf="quantityValueCtrl.errors!=null && quantityValueCtrl.errors.required">
             Quantity Value is required.
             </div>
     </div>
-
-    <div>
+<br>
+    <div class="form-group">
         <label>Price Per Unit</label>
-        <input type = "number" name = "pricePerUnit"  ngModel #priceCtrl= "ngModel" required>
+        <input type = "number" class="form-control" name = "pricePerUnit"  ngModel #priceCtrl= "ngModel" required>
         <div *ngIf= "priceCtrl.errors !=null && priceCtrl.errors.required">
             Price per unit is required.
         </div>
     </div>
-    
+ <br>
     <input type="submit" value="Place Order" >
 </form>
  
 
-<div *ngIf="rawMaterialOrder!=null">
+<div *ngIf="rawMaterialOrder!==null">
 <h3>Order placed Successfully</h3>  
- orderId = {{rawMaterialOrder.orderId}}
+ Your Order Id  = {{rawMaterialOrder.orderId}}
  <br>
- totalPrice = {{rawMaterialOrder.totalPrice}}
+ Tptal Price = {{rawMaterialOrder.totalPrice}}
+ <br>
+ Order Date  = {{rawMaterialOrder.dateOfOrder}}
 </div>
    

@@ -12,13 +12,14 @@ import com.cg.rawmaterialordermgt.dao.IRawMaterialOrderDao;
 import com.cg.rawmaterialordermgt.entities.RawMaterialOrderEntity;
 import com.cg.rawmaterialordermgt.exceptions.RawMaterialOrderNotFoundException;
 
-@Service
-@Transactional
+@Service    //indicates that this  class is a service class.
+@Transactional     
 public class RawMaterialOrderServiceImpl implements IRawMaterialOrderService
 {
 	@Autowired
     private IRawMaterialOrderDao orderDao ;
 	
+	//method to check orderId exists or not in the database
 	@Override
 	public boolean doesRawMaterialOrderIdExist(String orderId) {
 		 Optional<RawMaterialOrderEntity> optional= orderDao.findById(orderId);
@@ -30,19 +31,22 @@ public class RawMaterialOrderServiceImpl implements IRawMaterialOrderService
 		 throw new RawMaterialOrderNotFoundException("Order Id doesn't exist");
 	}
 
+	//method for updating an order
 	@Override
-	public  String updateStatusRawMaterialOrder(String orderId, String deliveryStatus) {
+	public RawMaterialOrderEntity updateStatusRawMaterialOrder(String orderId, String deliveryStatus) {
 		 Optional<RawMaterialOrderEntity> optional= orderDao.findById(orderId);
 		 if(optional.isPresent())
 		 {
 			 RawMaterialOrderEntity	order = optional.get();
+			 order.setOrderId(orderId);
 			 order.setDeliveryStatus(deliveryStatus);
-			 return "Delivery status updated successfully";
+			 return order;
 		 }
 		 throw new RawMaterialOrderNotFoundException("Order Id doesn't exist");
 		 	    
 	}
 
+	//method to auto generate a random orderId
 	public String generateId()
 	{
 		StringBuilder id = new StringBuilder();
@@ -55,7 +59,7 @@ public class RawMaterialOrderServiceImpl implements IRawMaterialOrderService
 		return id.toString();
 	}
 	
-	
+	//method for placing an order
 	@Override
 	public String placeRawMaterialOrder(RawMaterialOrderEntity rawMaterialOrder) {
 		String orderId = generateId();
@@ -79,7 +83,7 @@ public class RawMaterialOrderServiceImpl implements IRawMaterialOrderService
 	  
 	}
 	
-	
+	//method to display all the orders present in the database
 	@Override
 	public List<RawMaterialOrderEntity> displayRawMaterialOrders() {
         List<RawMaterialOrderEntity> orders=  orderDao.findAll();

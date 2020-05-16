@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RawMaterialOrder } from '../model/rawMaterialOrder';
+import { RawMaterialOrderService } from '../services/rawmaterialorderservice';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'display-orders',
@@ -7,15 +9,27 @@ import { RawMaterialOrder } from '../model/rawMaterialOrder';
   styleUrls: ['./display-orders.component.css']
 })
 export class DisplayOrdersComponent implements OnInit {
-
-  constructor() { }
   
   orders:RawMaterialOrder[]=[];
+   service: RawMaterialOrderService;
+   
+  constructor(service: RawMaterialOrderService) {
+    this.service=service;
+    let observable:Observable<RawMaterialOrder[]>=this.service.fetchAllOrders();
+
+  observable.subscribe(
+    order=>{
+      this.orders=order;
+     console.log("Length = "+this.orders.length);
+    },
+    err=>console.log("Error:" +err)
+    );
+  }
   
   ngOnInit(): void {
-    this.orders.push( new RawMaterialOrder("Lemon","9687564",800));
-    this.orders.push(new RawMaterialOrder("Apple","9745453",10000));
-    this.orders.push(new RawMaterialOrder("Pineapple","5463431",2000));
+
   }
+  
+
   
 }

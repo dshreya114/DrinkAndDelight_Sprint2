@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RawMaterialOrder } from '../model/rawMaterialOrder';
+import { RawMaterialOrderService } from '../services/rawmaterialorderservice';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'update-order',
@@ -7,10 +9,14 @@ import { RawMaterialOrder } from '../model/rawMaterialOrder';
   styleUrls: ['./update-order.component.css']
 })
 export class UpdateOrderComponent implements OnInit {
-
-  constructor() { }
+  
+  service: RawMaterialOrderService;
+  constructor(service: RawMaterialOrderService) { 
+    this.service=service;
+  }
 
   rawMaterialOrder:RawMaterialOrder = null;
+
   ngOnInit(): void {
   }
 
@@ -22,6 +28,17 @@ export class UpdateOrderComponent implements OnInit {
     this.rawMaterialOrder= new RawMaterialOrder();
     this.rawMaterialOrder.orderId=orderId;
     this.rawMaterialOrder.deliveryStatus= deliveryStatus;
-    form.reset();
+
+    let result =this.service.updateOrder(this.rawMaterialOrder); 
+    result.subscribe((rawMaterialOrder:RawMaterialOrder)=>{
+      this.rawMaterialOrder=rawMaterialOrder;
+    },
+     err=>{
+    console.log("error ="+err);
+    } );
+
+     form.reset();
+    }
+  
   }
-}
+

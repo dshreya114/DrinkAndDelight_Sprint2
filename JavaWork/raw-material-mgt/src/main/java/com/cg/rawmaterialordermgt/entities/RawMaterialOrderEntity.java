@@ -2,12 +2,13 @@ package  com.cg.rawmaterialordermgt.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
-@Entity
-@Table(name = "rawmaterialorders")
+@Entity  //indicates that this class is an entity class
+@Table(name = "rawmaterialorders")   
 public class RawMaterialOrderEntity {
 
-    @Id
+    @Id    
     private  String  orderId;
     private String name;
     private String supplierId;
@@ -87,29 +88,18 @@ public class RawMaterialOrderEntity {
 		this.warehouseId = warehouseId;
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		RawMaterialOrderEntity other = (RawMaterialOrderEntity) obj;
-		if (orderId == null) {
-			if (other.orderId != null)
-				return false;
-		} else if (!orderId.equals(other.orderId))
-			return false;
-		return true;
-	}
-	
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        RawMaterialOrderEntity entity = (RawMaterialOrderEntity )object;
+        return orderId ==entity.orderId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId);
+    }
     
 }

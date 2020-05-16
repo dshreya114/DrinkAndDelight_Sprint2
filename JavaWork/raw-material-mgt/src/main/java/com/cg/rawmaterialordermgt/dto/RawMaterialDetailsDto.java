@@ -1,11 +1,16 @@
 package com.cg.rawmaterialordermgt.dto;
 
+import java.util.Date;
+
 public class RawMaterialDetailsDto {
 
 	private String orderId;
 	private String name;
-	private  double quantityvalue;
+	private  double quantityValue;
 	private String warehouseId;
+	private String supplierId;
+	private double totalPrice;
+	private  Date  dateOfOrder;
 	
 	public String getOrderId() {
 		return orderId;
@@ -19,11 +24,11 @@ public class RawMaterialDetailsDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public double getQuantityvalue() {
-		return quantityvalue;
+	public double getQuantityValue() {
+		return quantityValue;
 	}
-	public void setQuantityvalue(double quantityvalue) {
-		this.quantityvalue = quantityvalue;
+	public void setQuantityValue(double quantityValue) {
+		this.quantityValue = quantityValue;
 	}
 	
 	public String getWarehouseId() {
@@ -31,6 +36,24 @@ public class RawMaterialDetailsDto {
 	}
 	public void setWarehouseId(String warehouseId) {
 		this.warehouseId = warehouseId;
+	}
+	public String getSupplierId() {
+		return supplierId;
+	}
+	public void setSupplierId(String supplierId) {
+		this.supplierId = supplierId;
+	}
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public Date getDateOfOrder() {
+		return dateOfOrder;
+	}
+	public void setDateOfOrder(Date dateOfOrder) {
+		this.dateOfOrder = dateOfOrder;
 	}
 	
 	

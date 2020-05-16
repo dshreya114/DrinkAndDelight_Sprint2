@@ -11,12 +11,8 @@ export class RawMaterialOrder{
     dateOfDelivery: Date;
     supplierId  : String;
 
-  constructor(name : String,orderId : String,totalPrice: number)
+  constructor()
   {
-this.name = name;
-this.orderId=orderId;
-this.totalPrice=totalPrice;
   }
-  
     
 }

@@ -16,6 +16,9 @@ export class UpdateOrderComponent implements OnInit {
   }
 
   rawMaterialOrder:RawMaterialOrder = null;
+  errorMsg = null;
+  foundStatus=null;
+
 
   ngOnInit(): void {
   }
@@ -30,12 +33,18 @@ export class UpdateOrderComponent implements OnInit {
     this.rawMaterialOrder.deliveryStatus= deliveryStatus;
 
     let result =this.service.updateOrder(this.rawMaterialOrder); 
-    result.subscribe((rawMaterialOrder:RawMaterialOrder)=>{
+    result.subscribe(
+      (rawMaterialOrder:RawMaterialOrder)=>{
       this.rawMaterialOrder=rawMaterialOrder;
+      this.foundStatus= "found";
     },
+
      err=>{
-    console.log("error ="+err);
-    } );
+      this.foundStatus = "notFound";
+     this.errorMsg = err.error;
+     console.log("error while fetching order:"+err);
+    }
+     );
 
      form.reset();
     }

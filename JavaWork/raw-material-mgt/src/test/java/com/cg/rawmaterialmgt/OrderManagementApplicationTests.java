@@ -1,10 +1,10 @@
-package org.cap.empmgt;
+package com.cg.rawmaterialmgt;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EmployeeManagementApplicationTests {
+class OrderManagementApplicationTests {
 
 	@Test
 	void contextLoads() {

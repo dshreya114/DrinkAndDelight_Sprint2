@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 100px; margin-left: 200px;"></div>
+
 <h3>Update Delivery Status: </h3>
 <form #updateForm="ngForm" (ngSubmit)= " updateForm.valid && updateOrder(updateForm)">
     <div class="form-group">
@@ -16,15 +16,21 @@
         <label>Enter Delivery Status :</label>
         <input type = "text" class="form-control" name = "deliveryStatus" ngModel #statusCtrl=ngModel required >
         <div *ngIf="statusCtrl.errors!=null && statusCtrl.errors.required">
-           Delivery Sttatus is required.
+           Delivery Status is required.
             </div>
    
     </div>
-
+<br>
     <input type = "submit" value = "Update Order">
 </form>
 
-<div *ngIf="rawMaterialOrder!==null">
+<div *ngIf="foundStatus==='found'" >
 <h3>Delivery Status updated Successfully for the id : {{rawMaterialOrder.orderId}}</h3>
+</div>
+
+<div *ngIf="foundStatus==='notFound'">
+<h3>{{errorMsg}}</h3>
+</div>
+
 
 

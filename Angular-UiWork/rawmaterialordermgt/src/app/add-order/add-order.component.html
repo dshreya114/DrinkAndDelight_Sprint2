@@ -52,11 +52,13 @@
  
 
 <div *ngIf="rawMaterialOrder!==null">
-<h3>Order placed Successfully</h3>  
+<h3>Order placed Successfully & here are the order details: </h3>  
  Your Order Id  = {{rawMaterialOrder.orderId}}
  <br>
- Tptal Price = {{rawMaterialOrder.totalPrice}}
+ Total Price = {{rawMaterialOrder.totalPrice}}
  <br>
  Order Date  = {{rawMaterialOrder.dateOfOrder}}
+ <br>
+ Expected Delivery Date = {{rawMaterialOrder.deliveryDate}}
 </div>
    

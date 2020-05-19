@@ -2,6 +2,7 @@ package com.cg.rawmaterialordermgt.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import com.cg.rawmaterialordermgt.dto.RawMaterialOrderResponseDto;
 import com.cg.rawmaterialordermgt.entities.RawMaterialOrderEntity;
 import com.cg.rawmaterialordermgt.exceptions.RawMaterialOrderNotFoundException;
 import com.cg.rawmaterialordermgt.service.RawMaterialOrderServiceImpl;
+import com.cg.rawmaterialordermgt.util.DateUtil;
 
 
 @RestController
@@ -57,8 +59,14 @@ public class RawMaterialOrderController {
 		RawMaterialOrderResponseDto responseDto = new RawMaterialOrderResponseDto();
 		responseDto.setOrderId(rawMaterialOrderEntity.getOrderId());
 		responseDto.setTotalPrice(rawMaterialOrderEntity.getTotalPrice());
-		responseDto.setDateOfOrder(rawMaterialOrderEntity.getDateOfOrder());
-		responseDto.setDateOfDelivery(rawMaterialOrderEntity.getDateOfDelivery());
+		
+		Date orderDate= rawMaterialOrderEntity.getDateOfOrder();
+		String dateofOrder = DateUtil.toString(orderDate,"dd-MM-yyyy");
+		responseDto.setDateOfOrder(dateofOrder);
+		
+		Date deliveryDate =  rawMaterialOrderEntity.getDateOfDelivery();
+		String dateOfDelivery = DateUtil.toString(deliveryDate, "dd-MM-yyyy");
+		responseDto.setDateOfDelivery(dateOfDelivery);
 		return responseDto;
 	}
 

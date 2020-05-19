@@ -1,6 +1,10 @@
 package com.cg.rawmaterialordermgt.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -61,18 +65,21 @@ public class RawMaterialOrderServiceImpl implements IRawMaterialOrderService
 	
 	//method for placing an order
 	@Override
-	public String placeRawMaterialOrder(RawMaterialOrderEntity rawMaterialOrder) {
+	public String placeRawMaterialOrder(RawMaterialOrderEntity rawMaterialOrder) throws ParseException {
 		String orderId = generateId();
 		rawMaterialOrder.setOrderId(orderId);
 		
-		Date dateOfOrder = new Date();
-		 rawMaterialOrder.setDateOfOrder(dateOfOrder);
-		 
-		 LocalDate todayDate = LocalDate.now();
-		 LocalDate deliveryDate = todayDate .plusDays(7);
-		 Date dateOfDelivery = new Date(deliveryDate.getYear(), deliveryDate.getMonthValue(),deliveryDate.getDayOfMonth());
-		 rawMaterialOrder.setDateOfDelivery(dateOfDelivery);
-		 
+		//SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		//String str = format.format(date);
+		//Date dateOfOrder = format.parse(str);
+		 rawMaterialOrder.setDateOfOrder(date);
+		
+		   Calendar calendar=Calendar.getInstance();
+	        calendar.add(Calendar.DAY_OF_MONTH,7);
+	        Date deliveryDate=calendar.getTime();
+	        rawMaterialOrder.setDateOfDelivery(deliveryDate);
+	        
 		 double pricePerUnit = rawMaterialOrder.getPricePerUnit();
 		 double quantityValue = rawMaterialOrder.getQuantityValue();
 		 double totalPrice = pricePerUnit * quantityValue;
